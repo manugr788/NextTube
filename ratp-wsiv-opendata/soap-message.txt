@@ -1,0 +1,73 @@
+Attention, l'ordre des parametres a de l'importance, sinon message de retour balise line inatendue
+
+http://opendata-tr.ratp.fr/wsiv/services/Wsiv
+
+POST /wsiv/services/Wsiv?wsdl= HTTP/1.1
+Host: opendata-tr.ratp.fr
+Content-Type: text/soap+xml; charset=utf-8
+Content-Length:336
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsiv="http://wsiv.ratp.fr" xmlns:xsd="http://wsiv.ratp.fr/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <wsiv:getLines>
+         <!--Optional:-->
+         <wsiv:line>
+            <!--Optional:-->
+            <xsd:id>M7</xsd:id>
+         </wsiv:line>
+      </wsiv:getLines>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+Connection: close
+
+
+Next passage
+================
+POST http://opendata-tr.ratp.fr/wsiv/services/Wsiv HTTP/1.1
+//Accept-Encoding: gzip,deflate
+Content-Type: text/xml;charset=UTF-8
+SOAPAction: "urn:getMissionsNext"
+Content-Length: 556
+Host: opendata-tr.ratp.fr
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsiv="http://wsiv.ratp.fr" xmlns:xsd="http://wsiv.ratp.fr/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <wsiv:getMissionsNext>
+        <wsiv:station>
+            <xsd:line>
+                <xsd:id>M7</xsd:id>
+            </xsd:line>
+            <xsd:name>Villejuif - Louis Aragon</xsd:name>
+        </wsiv:station>
+        <wsiv:direction>
+            <xsd:sens>R</xsd:sens>
+        </wsiv:direction>
+      </wsiv:getMissionsNext>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+client.println("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsiv=\"http://wsiv.ratp.fr\" xmlns:xsd=\"http://wsiv.ratp.fr/xsd\">");
+client.println("<soapenv:Header/>");
+client.println("<soapenv:Body>");
+client.println("<wsiv:getMissionsNext>");
+client.println("<wsiv:station>");
+client.println("<xsd:line>");
+client.println("<xsd:id>M7</xsd:id>");
+client.println("</xsd:line>");
+client.println("<xsd:name>Villejuif - Louis Aragon</xsd:name>");
+client.println("</wsiv:station>");
+client.println("<wsiv:direction>");
+client.println("<xsd:sens>R</xsd:sens>");
+client.println("</wsiv:direction>");
+client.println("</wsiv:getMissionsNext>");
+client.println("</soapenv:Body>");
+client.println("</soapenv:Envelope>");
